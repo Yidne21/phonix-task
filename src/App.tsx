@@ -7,6 +7,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MenuIcon from "@mui/icons-material/Menu";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const ArrowIcon = ({ direction = "up" }) => {
   const isUp = direction === "up";
@@ -44,13 +46,69 @@ function App() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: { xs: "space-between", sm: "center" },
-        height: "100vh",
-        padding: 2,
+        justifyContent: { xs: "space-between", sm: "flex-start" },
+        minHeight: "100vh",
+        padding: 0,
         background: "radial-gradient(circle at 50% 62%, #004dc0, #3b5097 88%)",
         gap: 2,
+        position: "relative",
       }}
     >
+      {/* Header */}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "8px 16px",
+          backgroundColor: "#1B3E86",
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Button
+            sx={{
+              minWidth: 0,
+              color: "white",
+              backgroundColor: "#2A4FA2",
+              borderRadius: "4px",
+              padding: "4px 8px",
+              "&:hover": { backgroundColor: "#2A4FA2" },
+            }}
+          >
+            HOTLINE
+            <KeyboardArrowDownIcon />
+          </Button>
+          <Button
+            sx={{
+              minWidth: 0,
+              color: "white",
+              padding: "4px 8px",
+              gap: 0.5,
+            }}
+          >
+            <HelpOutlineIcon sx={{ fontSize: 20 }} />
+            How to Play?
+          </Button>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Button
+            sx={{
+              backgroundColor: "#FF8E00",
+              color: "white",
+              borderRadius: "4px",
+              padding: "4px 16px",
+              "&:hover": { backgroundColor: "#FF8E00" },
+            }}
+          >
+            FUN MODE
+          </Button>
+          <Typography sx={{ color: "white" }}>2,969.50 USD</Typography>
+          <MenuIcon sx={{ color: "white", cursor: "pointer" }} />
+        </Box>
+      </Box>
+
       {/* bet history*/}
       <Box
         sx={{
@@ -63,6 +121,7 @@ function App() {
           px: 2,
           py: 1,
           position: "relative",
+          mt: 2,
         }}
       >
         <Box
@@ -145,59 +204,70 @@ function App() {
                   height: "30px",
                 }}
               ></Fab>
-              {/* Add more result items here if needed */}
             </Box>
           </Box>
         )}
       </Box>
 
-      {/* canvas */}
+      {/* Game board */}
       <Box
         sx={{
-          backgroundColor: "secondary.main",
-          display: "flex",
+          backgroundColor: "#1B3E86",
           width: "100%",
+          maxWidth: { xs: "100%", sm: "80%", md: "60%" },
           borderRadius: 2,
-          gap: "1px",
-          alignItems: "center",
-          aspectRatio: "auto 10003 / 494",
-          overflow: "clip",
-          overflowClipMargin: "content-box",
-          cursor: "inherit",
-          border: "1px solid #4D659B",
+          padding: 2,
           position: "relative",
-          height: { xs: "200px", sm: "250px" },
+          mx: "auto",
         }}
       >
-        <ArrowIcon direction="down" />
-        <ArrowIcon direction="up" />
-
-        {/* Game cards */}
-        {[0, 9].map((_, i) => (
-          <Box
-            key={i}
-            sx={{
-              backgroundColor: "#E20732",
-              width: "80px",
-              height: "80px",
-              borderRadius: 2,
-              border: "2px solid #FD3A5B",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0px 4px 6px #A6023D",
-            }}
-          >
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            gap: "4px",
+            justifyContent: "center",
+            padding: "20px 0",
+            position: "relative",
+          }}
+        >
+          <ArrowIcon direction="down" />
+          <ArrowIcon direction="up" />
+          
+          {Array(13).fill(null).map((_, i) => (
             <Box
+              key={i}
               sx={{
-                width: "50%",
-                height: "50%",
-                backgroundColor: "#FD3A5B",
-                borderRadius: "50%",
+                backgroundColor: i % 2 === 0 ? "#000000" : "#E20732",
+                width: "60px",
+                height: "60px",
+                borderRadius: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: i % 2 === 0 ? "1px solid #1a1a1a" : "1px solid #FD3A5B",
               }}
-            />
-          </Box>
-        ))}
+            >
+              {i === 10 && (
+                <img
+                  src="src/assets/fire.svg"
+                  alt="Fire"
+                  style={{ width: 24, height: 24 }}
+                />
+              )}
+              {i !== 10 && (
+                <Box
+                  sx={{
+                    width: "24px",
+                    height: "24px",
+                    backgroundColor: i % 2 === 0 ? "#1a1a1a" : "#FD3A5B",
+                    borderRadius: "50%",
+                  }}
+                />
+              )}
+            </Box>
+          ))}
+        </Box>
       </Box>
 
       {/* risk toggle */}
@@ -276,98 +346,8 @@ function App() {
           alignItems: "center",
           padding: 2,
           gap: 2,
-          borderRadius: "10px",
         }}
       >
-        {/* Bet type choice toggle buttons */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            order: { xs: 0, sm: 1 },
-            width: { xs: "100%", sm: "auto" },
-            justifyContent: { xs: "center", sm: "flex-start" },
-            mb: { xs: 2, sm: 0 },
-          }}
-        >
-          <Box
-            sx={{
-              borderRadius: "20px",
-              width: "78px",
-              height: "50px",
-              fontSize: "13px",
-              color: "white",
-              textShadow: "0 1px 0 rgba(0, 0, 0, .5)",
-              backgroundImage:
-                "radial-gradient(circle at 50% 50%, #ee0011, #b3000c 94%)",
-              border: "2px solid rgba(0, 0, 0, .9)",
-              boxShadow:
-                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 2,
-              textAlign: "center",
-            }}
-          >
-            <span>RED</span>
-            <span>X2</span>
-          </Box>
-          <Box
-            sx={{
-              borderRadius: "20px",
-              width: "78px",
-              height: "50px",
-              fontSize: "13px",
-              color: "white",
-              backgroundImage:
-                "radial-gradient(44% 44% at 49.36% 52%, #dba355 0%, #c4872e 100%)",
-              border: "2px solid rgba(0, 0, 0, .9)",
-              boxShadow:
-                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 2,
-              textAlign: "center",
-            }}
-          >
-            <img
-              src="src/assets/fire.svg"
-              alt="Hand Icon"
-              style={{ width: 22, height: 22 }}
-            />
-            <span>X32</span>
-          </Box>
-          <Box
-            sx={{
-              borderRadius: "20px",
-              width: "78px",
-              height: "50px",
-              fontSize: "13px",
-              color: "white",
-              textShadow: "0 1px 0 rgba(0, 0, 0, .5)",
-              backgroundImage:
-                "radial-gradient(circle at 50% 50%, #191818, #000000 74%)",
-              border: "2px solid rgba(0, 0, 0, .9)",
-              boxShadow:
-                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 2,
-              textAlign: "center",
-            }}
-          >
-            <span>Black</span>
-            <span>X2</span>
-          </Box>
-        </Box>
-
         {/* Bet amount input and +/- buttons */}
         <Box
           sx={{
@@ -398,20 +378,11 @@ function App() {
               lineHeight: 1,
             }}
           >
-            <Typography
-            // sx={{
-            //   color: "white",
-            //   fontWeight: "bold",
-            //   fontSize: "16px",
-            // }}
-            >
-              Bet USD
-            </Typography>
-
+            <Typography>Bet USD</Typography>
             <TextField
               variant="outlined"
               type="text"
-              placeholder="0.30"
+              value="0.30"
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -443,70 +414,141 @@ function App() {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center !important",
-              justifyContent: "center !important",
+              alignItems: "center",
+              justifyContent: "center",
               gap: 1,
             }}
           >
-            <Box
+            <Button
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "solid 1px rgba(0, 0, 0, .6)",
-                borderRadius: "100%",
+                minWidth: 0,
                 width: "40px",
                 height: "40px",
-                fontWeight: 400,
-                textAlign: "center",
-                lineHeight: 1.15,
-                textTransform: "none",
-                cursor: "pointer",
+                borderRadius: "50%",
+                border: "solid 1px rgba(0, 0, 0, .6)",
+                padding: 0,
               }}
             >
               <RemoveIcon sx={{ color: "#fff" }} />
-            </Box>
-            <Box
+            </Button>
+            <Button
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "solid 1px rgba(0, 0, 0, .6)",
-                borderRadius: "100%",
+                minWidth: 0,
                 width: "40px",
                 height: "40px",
-                fontWeight: 400,
-                textAlign: "center",
-                lineHeight: 1.15,
-                textTransform: "none",
-                cursor: "pointer",
+                borderRadius: "50%",
+                border: "solid 1px rgba(0, 0, 0, .6)",
+                padding: 0,
               }}
             >
               <img
                 src="src/assets/db.svg"
-                alt="Hand Icon"
+                alt="Double"
                 style={{ width: 16, height: 16 }}
               />
-            </Box>
-            <Box
+            </Button>
+            <Button
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "solid 1px rgba(0, 0, 0, .6)",
-                borderRadius: "100%",
+                minWidth: 0,
                 width: "40px",
                 height: "40px",
-                fontWeight: 400,
-                textAlign: "center",
-                lineHeight: 1.15,
-                textTransform: "none",
-                cursor: "pointer",
+                borderRadius: "50%",
+                border: "solid 1px rgba(0, 0, 0, .6)",
+                padding: 0,
               }}
             >
               <AddIcon sx={{ color: "#fff" }} />
-            </Box>
+            </Button>
           </Box>
+        </Box>
+
+        {/* Bet type choice toggle buttons */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            order: { xs: 0, sm: 1 },
+            width: { xs: "100%", sm: "auto" },
+            justifyContent: { xs: "center", sm: "flex-start" },
+            mb: { xs: 2, sm: 0 },
+          }}
+        >
+          <Button
+            sx={{
+              borderRadius: "20px",
+              width: "78px",
+              height: "50px",
+              fontSize: "13px",
+              color: "white",
+              textShadow: "0 1px 0 rgba(0, 0, 0, .5)",
+              backgroundImage:
+                "radial-gradient(circle at 50% 50%, #ee0011, #b3000c 94%)",
+              border: "2px solid rgba(0, 0, 0, .9)",
+              boxShadow:
+                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
+              display: "inline-flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              px: 2,
+              textAlign: "center",
+            }}
+          >
+            <span>RED</span>
+            <span>X2</span>
+          </Button>
+          <Button
+            sx={{
+              borderRadius: "20px",
+              width: "78px",
+              height: "50px",
+              fontSize: "13px",
+              color: "white",
+              backgroundImage:
+                "radial-gradient(44% 44% at 49.36% 52%, #dba355 0%, #c4872e 100%)",
+              border: "2px solid rgba(0, 0, 0, .9)",
+              boxShadow:
+                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
+              display: "inline-flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              px: 2,
+              textAlign: "center",
+            }}
+          >
+            <img
+              src="src/assets/fire.svg"
+              alt="Fire"
+              style={{ width: 22, height: 22 }}
+            />
+            <span>X32</span>
+          </Button>
+          <Button
+            sx={{
+              borderRadius: "20px",
+              width: "78px",
+              height: "50px",
+              fontSize: "13px",
+              color: "white",
+              textShadow: "0 1px 0 rgba(0, 0, 0, .5)",
+              backgroundImage:
+                "radial-gradient(circle at 50% 50%, #191818, #000000 74%)",
+              border: "2px solid rgba(0, 0, 0, .9)",
+              boxShadow:
+                "3px 3px 6px #020b1a80, inset -1px -1px #00000052, inset 1px 1px #fff1cd33",
+              display: "inline-flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              px: 2,
+              textAlign: "center",
+            }}
+          >
+            <span>BLACK</span>
+            <span>X2</span>
+          </Button>
         </Box>
       </Box>
     </Box>
