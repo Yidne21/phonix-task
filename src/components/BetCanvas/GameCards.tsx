@@ -52,7 +52,7 @@ export default function CardRows(props: ICardRowsProps) {
         >
           {isFire ? (
             <img
-              src="src/assets/fire.svg"
+              src="/assets/fire.svg"
               alt="Fire"
               style={{ width: 24, height: 24 }}
             />

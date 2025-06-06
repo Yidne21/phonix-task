@@ -72,7 +72,7 @@ export default function BetType(props: IBetTypeProps) {
         onClick={() => props.handlePlay(true)}
       >
         <img
-          src="src/assets/fire.svg"
+          src="/assets/fire.svg"
           alt="Hand Icon"
           style={{ width: 22, height: 22 }}
         />

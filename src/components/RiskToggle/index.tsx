@@ -28,7 +28,7 @@ export default function RiskToggle(props: IRiskToggleProps) {
         }}
       >
         <img
-          src="src/assets/hand.svg"
+          src="/assets/hand.svg"
           alt="Hand Icon"
           style={{ width: 32, height: 32 }}
         />

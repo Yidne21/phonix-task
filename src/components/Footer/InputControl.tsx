@@ -120,7 +120,7 @@ export default function InputControl() {
           </Box>
           <Box sx={controlButtonStyle} onClick={handleOpenAmountModal}>
             <img
-              src="src/assets/db.svg"
+              src="/assets/db.svg"
               alt="Hand Icon"
               style={{ width: 16, height: 16 }}
             />
