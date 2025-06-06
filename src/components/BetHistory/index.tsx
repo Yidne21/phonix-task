@@ -4,9 +4,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 
-interface IBetHistoryProps {}
-
-const BetHistory: React.FunctionComponent<IBetHistoryProps> = (props) => {
+const BetHistory: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleMenuClick = () => {
