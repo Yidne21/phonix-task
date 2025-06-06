@@ -19,11 +19,12 @@ function App() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: { xs: "space-between", sm: "center" },
-        height: "100vh",
-        padding: 2,
+        justifyContent: { xs: "space-between", sm: "flex-start" },
+        minHeight: "100vh",
+        padding: 0,
         background: "radial-gradient(circle at 50% 62%, #004dc0, #3b5097 88%)",
         gap: 2,
+        position: "relative",
       }}
     >
       <BetHistory />
