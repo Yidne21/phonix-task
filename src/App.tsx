@@ -8,9 +8,14 @@ import Footer from "./components/Footer";
 
 function App() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [play, setPlay] = useState<boolean>(false);
 
   const handleSetChecked = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handlePlay = (play: boolean) => {
+    setPlay(play);
   };
 
   return (
@@ -19,18 +24,21 @@ function App() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: { xs: "space-between", sm: "flex-start" },
+        justifyContent: { xs: "space-between", sm: "center" },
         minHeight: "100vh",
         padding: 0,
         background: "radial-gradient(circle at 50% 62%, #004dc0, #3b5097 88%)",
         gap: 2,
-        position: "relative",
       }}
     >
       <BetHistory />
-      <BetCanavas isRiskChecked={isChecked} />
+      <BetCanavas
+        isRiskChecked={isChecked}
+        play={play}
+        handlePlay={handlePlay}
+      />
       <RiskToggle isChecked={isChecked} onChange={handleSetChecked} />
-      <Footer />
+      <Footer handlePlay={handlePlay} />
     </Box>
   );
 }

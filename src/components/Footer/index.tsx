@@ -2,7 +2,9 @@ import { Box } from "@mui/material";
 import BetType from "./BetType";
 import InputControl from "./InputControl";
 
-export interface IFooterProps {}
+export interface IFooterProps {
+  handlePlay: (play: boolean) => void;
+}
 
 export default function Footer(props: IFooterProps) {
   return (
@@ -24,7 +26,7 @@ export default function Footer(props: IFooterProps) {
       }}
     >
       {/* Bet type choice toggle buttons */}
-      <BetType />
+      <BetType handlePlay={props.handlePlay} />
 
       {/* Bet amount input and +/- buttons */}
       <InputControl />

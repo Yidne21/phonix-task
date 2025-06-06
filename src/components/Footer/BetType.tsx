@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 
-export interface IBetTypeProps {}
+export interface IBetTypeProps {
+  handlePlay: (play: boolean) => void;
+}
 
 export default function BetType(props: IBetTypeProps) {
   return (
@@ -39,6 +41,7 @@ export default function BetType(props: IBetTypeProps) {
             transform: "scale(0.96)",
           },
         }}
+        onClick={() => props.handlePlay(true)}
       >
         <span>RED</span>
         <span>X2</span>
@@ -66,6 +69,7 @@ export default function BetType(props: IBetTypeProps) {
             transform: "scale(0.96)",
           },
         }}
+        onClick={() => props.handlePlay(true)}
       >
         <img
           src="src/assets/fire.svg"
@@ -98,6 +102,7 @@ export default function BetType(props: IBetTypeProps) {
             transform: "scale(0.96)",
           },
         }}
+        onClick={() => props.handlePlay(true)}
       >
         <span>Black</span>
         <span>X2</span>
