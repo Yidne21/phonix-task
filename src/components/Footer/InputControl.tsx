@@ -38,6 +38,15 @@ export default function InputControl() {
 
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
+  const handleIncrement = () => {
+    const amount = parseFloat(value) + 1;
+    setValue(amount.toFixed(2));
+  };
+
+  const handleDecreament = () => {
+    const amount = parseFloat(value) - 1;
+    setValue(amount.toFixed(2));
+  };
 
   return (
     <>
@@ -115,7 +124,7 @@ export default function InputControl() {
             gap: 1,
           }}
         >
-          <Box sx={controlButtonStyle}>
+          <Box sx={controlButtonStyle} onClick={handleDecreament}>
             <RemoveIcon sx={{ color: "#fff" }} />
           </Box>
           <Box sx={controlButtonStyle} onClick={handleOpenAmountModal}>
@@ -125,7 +134,7 @@ export default function InputControl() {
               style={{ width: 16, height: 16 }}
             />
           </Box>
-          <Box sx={controlButtonStyle}>
+          <Box sx={controlButtonStyle} onClick={handleIncrement}>
             <AddIcon sx={{ color: "#fff" }} />
           </Box>
         </Box>
